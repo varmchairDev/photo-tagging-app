@@ -1,0 +1,29 @@
+<%= javascript_include_tag 'uploadAndTag' %>
+
+<h1 id="upload-page-title">Upload Photo</h1>
+
+<section id="upload-form">
+<%= form_for :photo_form, remote: true do |f| %>
+    <%= f.label "Title" %>
+    <br />
+    <%= f.text_field :title %>
+    <br />
+
+    <%= f.label "Upload" %>
+    <%= f.file_field :picture, :id => "upload-field" %>
+    <br />
+
+    <%= f.label "Tags of Photo (seperate by comma and white space ', ')" %>
+    <br />
+    <%= f.text_field :tag_names %>
+    <br />
+
+    <section id="picked-photo">
+    </section>
+
+    <%= f.hidden_field :tags_in_photo, :id => "tags-field", tags: "", PosX1: "", PosX2: "", PosY1: "", PosY2: "" %>
+    <br />
+
+    <%= f.submit "Submit" %>
+<% end %>
+</section>

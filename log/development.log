@@ -1,0 +1,1201 @@
+  [1m[35m (2605.4ms)[0m  [1m[35mCREATE DATABASE "photo-tagging-app_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (1366.6ms)[0m  [1m[35mCREATE DATABASE "photo-tagging-app_test" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (361.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (35.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2632708806723192330)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreatePhotos (20200607154128)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (15.8ms)[0m  [1m[35mCREATE TABLE "photos" ("id" bigserial primary key, "title" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20200607154128_create_photos.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200607154128"]]
+  ↳ bin/rails:9
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreatePhotoTags (20200607154218)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (13.3ms)[0m  [1m[35mCREATE TABLE "photo_tags" ("id" bigserial primary key, "photo_tag" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20200607154218_create_photo_tags.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200607154218"]]
+  ↳ bin/rails:9
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateTags (20200607154253)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (18.2ms)[0m  [1m[35mCREATE TABLE "tags" ("id" bigserial primary key, "name" character varying, "PosX1" character varying, "PosX2" character varying, "PosY1" character varying, "PosY2" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20200607154253_create_tags.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200607154253"]]
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreatePhotoTaggings (20200607154808)
+  [1m[35m (3.8ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (10.0ms)[0m  [1m[35mCREATE TABLE "photo_taggings" ("id" bigserial primary key, "photo_id" bigint, "photo_tag_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_1dc10cdaa1"
+FOREIGN KEY ("photo_id")
+  REFERENCES "photos" ("id")
+, CONSTRAINT "fk_rails_73e8dd4de7"
+FOREIGN KEY ("photo_tag_id")
+  REFERENCES "photo_tags" ("id")
+)[0m
+  ↳ db/migrate/20200607154808_create_photo_taggings.rb:3
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE  INDEX  "index_photo_taggings_on_photo_id" ON "photo_taggings"  ("photo_id")[0m
+  ↳ db/migrate/20200607154808_create_photo_taggings.rb:3
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE  INDEX  "index_photo_taggings_on_photo_tag_id" ON "photo_taggings"  ("photo_tag_id")[0m
+  ↳ db/migrate/20200607154808_create_photo_taggings.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.9ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200607154808"]]
+  ↳ bin/rails:9
+  [1m[35m (1.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (1.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-06-07 16:04:27.581412"], ["updated_at", "2020-06-07 16:04:27.581412"]]
+  ↳ bin/rails:9
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_advisory_unlock(2632708806723192330)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(2632708806723192330)[0m
+  ↳ bin/rails:9
+  [1m[35m (44.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to AddTagNameToPhotoTags (20200608171038)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (223.2ms)[0m  [1m[35mALTER TABLE "photo_tags" ADD "tag_name" character varying[0m
+  ↳ db/migrate/20200608171038_add_tag_name_to_photo_tags.rb:3
+  [1m[35m (89.9ms)[0m  [1m[35mALTER TABLE "photo_tags" DROP COLUMN "photo_tag"[0m
+  ↳ db/migrate/20200608171038_add_tag_name_to_photo_tags.rb:4
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200608171038"]]
+  ↳ bin/rails:9
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (48.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(2632708806723192330)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Started GET "/" for 127.0.0.1 at 2020-06-09 22:12:11 +0300
+  [1m[35m (152.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/onur/.rvm/gems/ruby-2.6.3/gems/activerecord-5.2.4.3/lib/active_record/log_subscriber.rb:98
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/onur/.rvm/gems/ruby-2.6.3/gems/railties-5.2.4.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/onur/.rvm/gems/ruby-2.6.3/gems/railties-5.2.4.3/lib/rails/templates/rails/welcome/index.html.erb (271.4ms)
+Completed 200 OK in 424ms (Views: 332.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/uploads/new" for 127.0.0.1 at 2020-06-09 22:12:24 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/uploads/new"):
+  
+actionpack (5.2.4.3) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.4.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.4.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.4.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.4.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.4.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.4.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/method_override.rb:24:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.4.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.4.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/uploads" for 127.0.0.1 at 2020-06-09 22:15:24 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/uploads"):
+  
+actionpack (5.2.4.3) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.4.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.4.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.4.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.4.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.4.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.4.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/method_override.rb:24:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.4.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.4.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:15:33 +0300
+Processing by UploadsController#new as HTML
+Completed 500 Internal Server Error in 94ms (ActiveRecord: 0.0ms)
+
+
+  
+NameError (uninitialized constant Photo::PictureUploader):
+  
+app/models/photo.rb:5:in `<class:Photo>'
+app/models/photo.rb:1:in `<main>'
+app/controllers/uploads_controller.rb:4:in `new'
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:16:59 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (231.8ms)
+Completed 200 OK in 7773ms (Views: 7516.5ms | ActiveRecord: 186.4ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:25:29 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (10.8ms)
+Completed 200 OK in 107ms (Views: 103.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:28:01 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (7.3ms)
+Completed 200 OK in 137ms (Views: 130.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:28:34 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (6.4ms)
+Completed 200 OK in 113ms (Views: 110.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:40:03 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (301.1ms)
+Completed 500 Internal Server Error in 313ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (Asset was not declared to be precompiled in production.
+Add `Rails.application.config.assets.precompile += %w( uploadAndTag.js )` to `config/initializers/assets.rb` and restart your server):
+    1: <%= javascript_include_tag 'uploadAndTag' %>
+    2: 
+    3: <h1 id="upload-page-title">Upload Photo</h1>
+    4: 
+  
+app/views/uploads/new.html.erb:1:in `_app_views_uploads_new_html_erb___3728684549640726654_70037362985960'
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:40:55 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (33.6ms)
+Completed 500 Internal Server Error in 42ms (ActiveRecord: 0.0ms)
+
+
+  
+ActionView::Template::Error (Asset was not declared to be precompiled in production.
+Add `Rails.application.config.assets.precompile += %w( uploadAndTag.js )` to `config/initializers/assets.rb` and restart your server):
+    1: <%= javascript_include_tag 'uploadAndTag' %>
+    2: 
+    3: <h1 id="upload-page-title">Upload Photo</h1>
+    4: 
+  
+app/views/uploads/new.html.erb:1:in `_app_views_uploads_new_html_erb___3728684549640726654_70037269832840'
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:41:15 +0300
+  [1m[35m (2.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/onur/.rvm/gems/ruby-2.6.3/gems/activerecord-5.2.4.3/lib/active_record/log_subscriber.rb:98
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (777.7ms)
+Completed 200 OK in 1046ms (Views: 1027.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:44:36 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (20.2ms)
+Completed 200 OK in 408ms (Views: 404.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:44:55 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (27.9ms)
+Completed 200 OK in 346ms (Views: 343.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:45:26 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (23.1ms)
+Completed 200 OK in 276ms (Views: 273.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:46:00 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (99.2ms)
+Completed 200 OK in 572ms (Views: 563.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:46:17 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (46.8ms)
+Completed 200 OK in 396ms (Views: 390.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:48:22 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (25.4ms)
+Completed 200 OK in 305ms (Views: 302.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:48:38 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (27.2ms)
+Completed 200 OK in 331ms (Views: 327.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:49:34 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (13.0ms)
+Completed 200 OK in 108ms (Views: 105.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:49:57 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (32.1ms)
+Completed 200 OK in 330ms (Views: 327.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:51:32 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (23.5ms)
+Completed 200 OK in 330ms (Views: 324.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:52:02 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (25.3ms)
+Completed 200 OK in 311ms (Views: 308.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:52:21 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (26.9ms)
+Completed 200 OK in 351ms (Views: 348.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:54:07 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (11.7ms)
+Completed 200 OK in 249ms (Views: 245.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 22:54:54 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (27.5ms)
+Completed 200 OK in 324ms (Views: 321.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 23:01:53 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (12.5ms)
+Completed 200 OK in 84ms (Views: 81.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 23:02:47 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (21.2ms)
+Completed 200 OK in 279ms (Views: 276.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 23:02:52 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (15.2ms)
+Completed 200 OK in 103ms (Views: 100.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-09 23:03:19 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (21.2ms)
+Completed 200 OK in 292ms (Views: 289.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2020-06-28 22:48:19 +0300
+  [1m[35m (53.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/onur/.rvm/gems/ruby-2.6.3/gems/activerecord-5.2.4.3/lib/active_record/log_subscriber.rb:98
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/onur/.rvm/gems/ruby-2.6.3/gems/railties-5.2.4.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/onur/.rvm/gems/ruby-2.6.3/gems/railties-5.2.4.3/lib/rails/templates/rails/welcome/index.html.erb (15.1ms)
+Completed 200 OK in 169ms (Views: 103.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/new" for 127.0.0.1 at 2020-06-28 22:48:29 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/new"):
+  
+actionpack (5.2.4.3) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.4.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.4.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.4.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.4.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.4.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.4.3) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/method_override.rb:24:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.4.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.4.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+railties (5.2.4.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.6) lib/puma/configuration.rb:227:in `call'
+puma (3.12.6) lib/puma/server.rb:706:in `handle_request'
+puma (3.12.6) lib/puma/server.rb:476:in `process_client'
+puma (3.12.6) lib/puma/server.rb:334:in `block in run'
+puma (3.12.6) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/upload" for 127.0.0.1 at 2020-06-28 22:48:39 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (2199.5ms)
+Completed 200 OK in 2491ms (Views: 2465.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-28 22:49:25 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (24.5ms)
+Completed 200 OK in 352ms (Views: 348.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-28 22:51:33 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (29.8ms)
+Completed 200 OK in 431ms (Views: 425.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-28 22:52:50 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (38.1ms)
+Completed 200 OK in 477ms (Views: 471.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-28 22:56:58 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (34.7ms)
+Completed 200 OK in 632ms (Views: 629.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-28 22:57:45 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (13.3ms)
+Completed 200 OK in 97ms (Views: 93.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-28 22:58:22 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (21.6ms)
+Completed 200 OK in 133ms (Views: 130.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-28 22:58:56 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (11.0ms)
+Completed 200 OK in 95ms (Views: 92.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-28 22:59:13 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (12.8ms)
+Completed 200 OK in 166ms (Views: 163.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-28 23:00:37 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (45.5ms)
+Completed 200 OK in 560ms (Views: 555.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-06-28 23:01:52 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (98.3ms)
+Completed 200 OK in 972ms (Views: 969.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2020-07-18 18:24:30 +0300
+  [1m[35m (52.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/onur/.rvm/gems/ruby-2.6.3/gems/activerecord-5.2.4.3/lib/active_record/log_subscriber.rb:98
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/onur/.rvm/gems/ruby-2.6.3/gems/railties-5.2.4.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/onur/.rvm/gems/ruby-2.6.3/gems/railties-5.2.4.3/lib/rails/templates/rails/welcome/index.html.erb (7.7ms)
+Completed 200 OK in 113ms (Views: 41.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:24:39 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (4773.6ms)
+Completed 200 OK in 5782ms (Views: 5772.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:25:09 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (21.9ms)
+Completed 200 OK in 373ms (Views: 370.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:26:36 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (43.6ms)
+Completed 200 OK in 337ms (Views: 330.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:27:31 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (27.9ms)
+Completed 200 OK in 314ms (Views: 310.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:28:53 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (35.7ms)
+Completed 200 OK in 355ms (Views: 351.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:29:15 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (22.9ms)
+Completed 200 OK in 295ms (Views: 292.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:32:52 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (93.0ms)
+Completed 200 OK in 362ms (Views: 359.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:33:08 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (22.8ms)
+Completed 200 OK in 331ms (Views: 328.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:33:15 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (11.9ms)
+Completed 200 OK in 89ms (Views: 85.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:34:09 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (24.9ms)
+Completed 200 OK in 280ms (Views: 277.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:34:45 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (26.4ms)
+Completed 200 OK in 302ms (Views: 298.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:35:34 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (22.1ms)
+Completed 200 OK in 257ms (Views: 254.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:35:37 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (11.2ms)
+Completed 200 OK in 118ms (Views: 112.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:36:17 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (27.9ms)
+Completed 200 OK in 294ms (Views: 291.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:37:12 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (28.3ms)
+Completed 200 OK in 272ms (Views: 268.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:37:16 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (41.0ms)
+Completed 200 OK in 129ms (Views: 125.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:37:38 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (23.9ms)
+Completed 200 OK in 302ms (Views: 295.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:37:52 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (27.5ms)
+Completed 200 OK in 287ms (Views: 283.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:38:10 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (32.8ms)
+Completed 200 OK in 380ms (Views: 377.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:38:16 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (16.4ms)
+Completed 200 OK in 119ms (Views: 116.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:39:10 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (24.3ms)
+Completed 200 OK in 312ms (Views: 309.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:39:41 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (23.2ms)
+Completed 200 OK in 295ms (Views: 291.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:40:36 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (27.8ms)
+Completed 200 OK in 316ms (Views: 313.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:40:59 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (28.2ms)
+Completed 200 OK in 294ms (Views: 291.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:41:16 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (30.7ms)
+Completed 200 OK in 314ms (Views: 310.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:42:25 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (24.7ms)
+Completed 200 OK in 327ms (Views: 324.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:42:55 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (31.0ms)
+Completed 200 OK in 367ms (Views: 363.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:43:25 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (85.0ms)
+Completed 200 OK in 431ms (Views: 428.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:43:58 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (36.7ms)
+Completed 200 OK in 482ms (Views: 478.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:44:47 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (23.7ms)
+Completed 200 OK in 306ms (Views: 303.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-18 18:45:04 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (28.4ms)
+Completed 200 OK in 327ms (Views: 324.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-22 19:56:22 +0300
+  [1m[35m (52.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/onur/.rvm/gems/ruby-2.6.3/gems/activerecord-5.2.4.3/lib/active_record/log_subscriber.rb:98
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (2908.1ms)
+Completed 200 OK in 3372ms (Views: 3325.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-22 19:58:52 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (79.3ms)
+Completed 200 OK in 320ms (Views: 317.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-22 19:59:15 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (27.4ms)
+Completed 200 OK in 302ms (Views: 299.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-22 20:00:15 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (31.5ms)
+Completed 200 OK in 332ms (Views: 329.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-22 20:18:54 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (34.6ms)
+Completed 200 OK in 491ms (Views: 485.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-22 20:19:14 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (17.5ms)
+Completed 200 OK in 157ms (Views: 154.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-22 20:21:37 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (15.2ms)
+Completed 200 OK in 165ms (Views: 163.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-22 20:23:40 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (12.9ms)
+Completed 200 OK in 149ms (Views: 146.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-22 20:24:50 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (11.9ms)
+Completed 200 OK in 199ms (Views: 192.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-22 20:28:57 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (27.8ms)
+Completed 200 OK in 276ms (Views: 273.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-22 20:32:21 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (51.1ms)
+Completed 200 OK in 328ms (Views: 325.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-22 20:33:54 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (20.8ms)
+Completed 200 OK in 145ms (Views: 142.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-22 20:34:11 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (13.3ms)
+Completed 200 OK in 172ms (Views: 168.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-22 20:34:36 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (11.1ms)
+Completed 200 OK in 136ms (Views: 133.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-22 20:37:29 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (16.1ms)
+Completed 200 OK in 119ms (Views: 114.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-22 20:37:58 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (26.1ms)
+Completed 200 OK in 326ms (Views: 322.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-22 20:38:56 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (14.5ms)
+Completed 200 OK in 156ms (Views: 153.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-22 20:39:06 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (15.8ms)
+Completed 200 OK in 177ms (Views: 174.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2020-07-23 19:18:26 +0300
+  [1m[35m (39.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/onur/.rvm/gems/ruby-2.6.3/gems/activerecord-5.2.4.3/lib/active_record/log_subscriber.rb:98
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/onur/.rvm/gems/ruby-2.6.3/gems/railties-5.2.4.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/onur/.rvm/gems/ruby-2.6.3/gems/railties-5.2.4.3/lib/rails/templates/rails/welcome/index.html.erb (7.2ms)
+Completed 200 OK in 94ms (Views: 39.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-23 19:18:38 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (2695.9ms)
+Completed 200 OK in 2961ms (Views: 2938.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-23 19:23:52 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (28.0ms)
+Completed 200 OK in 428ms (Views: 424.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-23 19:25:44 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (23.6ms)
+Completed 200 OK in 321ms (Views: 318.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-23 19:26:28 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (12.6ms)
+Completed 200 OK in 95ms (Views: 93.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-23 19:26:43 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (13.7ms)
+Completed 200 OK in 112ms (Views: 109.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-23 19:28:03 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (25.1ms)
+Completed 200 OK in 285ms (Views: 282.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-23 19:28:40 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (26.0ms)
+Completed 200 OK in 143ms (Views: 140.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 127.0.0.1 at 2020-07-27 18:47:39 +0300
+  [1m[35m (62.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/onur/.rvm/gems/ruby-2.6.3/gems/activerecord-5.2.4.3/lib/active_record/log_subscriber.rb:98
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/onur/.rvm/gems/ruby-2.6.3/gems/railties-5.2.4.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/onur/.rvm/gems/ruby-2.6.3/gems/railties-5.2.4.3/lib/rails/templates/rails/welcome/index.html.erb (7.4ms)
+Completed 200 OK in 92ms (Views: 40.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 18:47:49 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (2561.8ms)
+Completed 200 OK in 3048ms (Views: 3028.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 18:49:11 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (73.6ms)
+Completed 200 OK in 462ms (Views: 458.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 18:52:03 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (25.9ms)
+Completed 200 OK in 270ms (Views: 267.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 18:53:04 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (25.3ms)
+Completed 200 OK in 342ms (Views: 339.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 18:53:19 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (15.0ms)
+Completed 200 OK in 126ms (Views: 117.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 18:53:27 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (13.8ms)
+Completed 200 OK in 138ms (Views: 135.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 18:53:43 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (21.4ms)
+Completed 200 OK in 159ms (Views: 156.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 18:54:32 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (27.8ms)
+Completed 200 OK in 271ms (Views: 268.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 18:55:38 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (33.0ms)
+Completed 200 OK in 349ms (Views: 346.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 18:56:01 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (23.9ms)
+Completed 200 OK in 284ms (Views: 281.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 18:56:51 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (50.1ms)
+Completed 200 OK in 475ms (Views: 468.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 18:57:48 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (27.4ms)
+Completed 200 OK in 314ms (Views: 310.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 18:58:22 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (56.2ms)
+Completed 200 OK in 327ms (Views: 324.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 18:58:33 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (20.3ms)
+Completed 200 OK in 297ms (Views: 294.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:00:03 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (22.2ms)
+Completed 200 OK in 298ms (Views: 295.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:09:29 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (19.1ms)
+Completed 200 OK in 249ms (Views: 245.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:10:27 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (22.3ms)
+Completed 200 OK in 300ms (Views: 296.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:12:17 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (23.4ms)
+Completed 200 OK in 293ms (Views: 290.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:16:31 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (14.6ms)
+Completed 200 OK in 98ms (Views: 95.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:18:36 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (13.4ms)
+Completed 200 OK in 126ms (Views: 123.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:20:55 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (23.2ms)
+Completed 200 OK in 285ms (Views: 282.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:22:07 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (57.9ms)
+Completed 200 OK in 348ms (Views: 344.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:22:47 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (28.7ms)
+Completed 200 OK in 343ms (Views: 340.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:30:19 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (12.8ms)
+Completed 200 OK in 92ms (Views: 89.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:31:25 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (32.9ms)
+Completed 200 OK in 347ms (Views: 345.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:33:03 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (30.8ms)
+Completed 200 OK in 356ms (Views: 351.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:39:27 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (28.0ms)
+Completed 200 OK in 303ms (Views: 300.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:41:08 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (26.9ms)
+Completed 200 OK in 320ms (Views: 314.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:41:19 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (26.2ms)
+Completed 200 OK in 278ms (Views: 275.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:42:07 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (27.1ms)
+Completed 200 OK in 301ms (Views: 298.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:43:39 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (28.9ms)
+Completed 200 OK in 361ms (Views: 357.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:46:08 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (11.9ms)
+Completed 200 OK in 151ms (Views: 148.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:46:53 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (35.6ms)
+Completed 200 OK in 346ms (Views: 340.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-27 19:47:38 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (77.8ms)
+Completed 200 OK in 369ms (Views: 366.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-31 23:14:42 +0300
+  [1m[35m (55.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/onur/.rvm/gems/ruby-2.6.3/gems/activerecord-5.2.4.3/lib/active_record/log_subscriber.rb:98
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (1680.5ms)
+Completed 200 OK in 2088ms (Views: 2060.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-07-31 23:15:02 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (3.5ms)
+Completed 200 OK in 28ms (Views: 27.4ms | ActiveRecord: 0.0ms)
+
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              Started GET "/" for 127.0.0.1 at 2020-08-01 19:13:34 +0300
+  [1m[35m (52.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/onur/.rvm/gems/ruby-2.6.3/gems/activerecord-5.2.4.3/lib/active_record/log_subscriber.rb:98
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/onur/.rvm/gems/ruby-2.6.3/gems/railties-5.2.4.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/onur/.rvm/gems/ruby-2.6.3/gems/railties-5.2.4.3/lib/rails/templates/rails/welcome/index.html.erb (7.2ms)
+Completed 200 OK in 93ms (Views: 39.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-08-01 19:13:46 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (2250.0ms)
+Completed 200 OK in 2793ms (Views: 2790.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-08-01 19:14:31 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (145.4ms)
+Completed 200 OK in 444ms (Views: 441.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-08-01 19:15:31 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (31.3ms)
+Completed 200 OK in 379ms (Views: 374.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/upload" for 127.0.0.1 at 2020-08-01 19:16:34 +0300
+Processing by UploadsController#new as HTML
+  Rendering uploads/new.html.erb within layouts/application
+  Rendered uploads/new.html.erb within layouts/application (29.1ms)
+Completed 200 OK in 295ms (Views: 292.1ms | ActiveRecord: 0.0ms)
+
+
